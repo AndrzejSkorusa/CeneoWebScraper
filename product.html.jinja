@@ -1,0 +1,32 @@
+{% extends "base.html.jinja" %}
+{% block title %}
+Opinie o produkcie {{ product_id }}
+{% endblock title %}
+{% block content %}
+<section style="text-align: center; font-size: 20px; margin-top: 50px;">
+    <div id="profile" style="max-width: 1000px;">
+        <img class="profile" src="{{ url_for('static', filename='opinion.png') }}">
+        <h2>Opinie o produkcie: {{ product_id }}</h2>
+    <div id="product">
+        <ul style="color: #fff; font-family: Roboto; list-style-type: none; padding: 0;">
+            {% for opinion in product %}
+                <li class="opinion">
+                    <p class="date">{{ opinion.post_date }}</p>
+                    <h3 class="author">{{ opinion.author }}</h3>
+                    <p>Ocena: <span class="products">{{ opinion.stars }}</span></p>
+                    <p class="content">{{ opinion.content }}</p>
+                    <p>Data zakupu: <span class="products">{{ opinion.purchase_date }}</span></p>
+                    <p>Pomocna: <span class="products">{{ opinion.useful }}</span></p>
+                    <p>Niepomocna: <span class="products">{{ opinion.useless }}</span></p>
+                    {% if opinion.pros %}
+                        <p>Plusy: <span class="products">{{ ', '.join(opinion.pros) }}</span></p>
+                    {% endif %}
+                    {% if opinion.cons %}
+                        <p>Minusy: <span class="products">{{ ', '.join(opinion.cons) }}</span></p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock content %}
